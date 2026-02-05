@@ -41,6 +41,15 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install protoc
+        run: |
+          PROTOC_VERSION=25.1
+          curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip
+          sudo unzip -o protoc-${PROTOC_VERSION}-linux-x86_64.zip -d /usr/local bin/protoc
+          sudo unzip -o protoc-${PROTOC_VERSION}-linux-x86_64.zip -d /usr/local 'include/*'
+          rm protoc-${PROTOC_VERSION}-linux-x86_64.zip
+          protoc --version
+
       # --- INSTALL PLUGINS ---
       - name: Install Go Plugins
         run: |

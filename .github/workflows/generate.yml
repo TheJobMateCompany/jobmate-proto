@@ -86,6 +86,12 @@ jobs:
       - name: Run Buf Generate
         run: buf generate
 
+      # --- ADD TYPESCRIPT METADATA ---
+      - name: Add TypeScript package files
+        run: |
+          cp templates/ts/package.json gen/ts/
+          cp templates/ts/README.md gen/ts/
+
       # --- PYTHON FIXES ---
       # Python a besoin de __init__.py dans chaque dossier pour importer les modules
       - name: Add __init__.py for Python

@@ -30,3 +30,5 @@ plugins:
       - esModuleInterop=true
       - outputServices=grpc-js
       - env=node
+      - useExactTypes=false
+      - useOptionals=messages

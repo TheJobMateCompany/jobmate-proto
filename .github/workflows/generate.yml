@@ -59,15 +59,13 @@ jobs:
       - name: Install Python Plugins
         run: |
           python -m pip install grpcio-tools mypy-protobuf
-          # Installer le plugin standalone
-          python -m pip install grpcio
-          # Copier/lier le plugin depuis le package Python
+          # Créer un lien symbolique pour le plugin grpc_python
           PYTHON_SITE=$(python -c "import site; print(site.getsitepackages()[0])")
-          sudo cp ${PYTHON_SITE}/grpc_tools/grpc_python_plugin /usr/local/bin/protoc-gen-grpc-python 2>/dev/null || \
-          sudo ln -sf ${PYTHON_SITE}/grpc_tools/grpc_python_plugin /usr/local/bin/protoc-gen-grpc-python || \
-          sudo find /opt/hostedtoolcache/Python -name "grpc_python_plugin" -exec cp {} /usr/local/bin/protoc-gen-grpc-python \; 2>/dev/null
+          sudo cp ${PYTHON_SITE}/grpc_tools/grpc_python_plugin /usr/local/bin/protoc-gen-grpc_python 2>/dev/null || \
+          sudo ln -sf ${PYTHON_SITE}/grpc_tools/grpc_python_plugin /usr/local/bin/protoc-gen-grpc_python || \
+          sudo find /opt/hostedtoolcache/Python -name "grpc_python_plugin" -exec cp {} /usr/local/bin/protoc-gen-grpc_python \; 2>/dev/null
           # Vérifier
-          ls -la /usr/local/bin/protoc-gen-grpc-python || echo "Plugin not found, will try direct python module"
+          ls -la /usr/local/bin/protoc-gen-grpc_python || echo "Plugin not found"
 
       - name: Install TS Plugins
         run: |

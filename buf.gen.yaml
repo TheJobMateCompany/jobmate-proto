@@ -20,11 +20,11 @@ plugins:
     out: gen/python
   - plugin: pyi # Pour l'autocomplétion (Type Hinting)
     out: gen/python
-  - plugin: grpc-python
+  - plugin: grpc_python
     out: gen/python
 
   # --- TYPESCRIPT ---
-  - plugin: ts
+  - plugin: ts_proto
     out: gen/ts
     opt:
       - esModuleInterop=true

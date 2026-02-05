@@ -59,6 +59,15 @@ jobs:
       - name: Install Python Plugins
         run: |
           python -m pip install grpcio-tools mypy-protobuf
+          # Trouver et lier le plugin gRPC Python
+          GRPC_PLUGIN=$(find /opt/hostedtoolcache/Python -name "grpc_python_plugin" 2>/dev/null | head -n 1)
+          if [ -z "$GRPC_PLUGIN" ]; then
+            GRPC_PLUGIN=$(find ~/.local -name "grpc_python_plugin" 2>/dev/null | head -n 1)
+          fi
+          if [ -n "$GRPC_PLUGIN" ]; then
+            sudo ln -sf "$GRPC_PLUGIN" /usr/local/bin/protoc-gen-grpc-python
+          fi
+          which protoc-gen-grpc-python || echo "Warning: grpc-python plugin not found"
 
       - name: Install TS Plugins
         run: |

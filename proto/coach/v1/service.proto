@@ -4,7 +4,7 @@ package jobmate.coach.v1;
 
 import "proto/common/v1/types.proto";
 
-option go_package = "github.com/TheJobMateCompany/jobmate-proto/gen/go/coach/v1;coachv1";
+option go_package = "github.com/TheJobMateCompany/jobmate-proto/gen/go/proto/coach/v1;coachv1";
 
 service CoachService {
   // Analyse une offre spécifique par rapport à un profil

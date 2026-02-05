@@ -4,7 +4,7 @@ package jobmate.auth.v1;
 
 import "proto/common/v1/types.proto";
 
-option go_package = "github.com/TheJobMateCompany/jobmate-proto/gen/proto/go/auth/v1;authv1";
+option go_package = "github.com/TheJobMateCompany/jobmate-proto/gen/go/proto/auth/v1;authv1";
 
 service AuthService {
   rpc Register (RegisterRequest) returns (AuthResponse);

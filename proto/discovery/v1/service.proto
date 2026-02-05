@@ -5,7 +5,7 @@ package jobmate.discovery.v1;
 import "google/protobuf/timestamp.proto";
 import "proto/common/v1/types.proto";
 
-option go_package = "github.com/TheJobMateCompany/jobmate-proto/gen/go/discovery/v1;discoveryv1";
+option go_package = "github.com/TheJobMateCompany/jobmate-proto/gen/go/proto/discovery/v1;discoveryv1";
 
 service DiscoveryService {
   // Inbox : Les offres trouvées par les scrapers

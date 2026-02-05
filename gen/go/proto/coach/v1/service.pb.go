@@ -7,7 +7,7 @@
 package coachv1
 
 import (
-	_ "github.com/jobmate-org/jobmate-proto/gen/go/proto/common/v1"
+	_ "github.com/TheJobMateCompany/jobmate-proto/gen/go/proto/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -278,8 +278,8 @@ const file_proto_coach_v1_service_proto_rawDesc = "" +
 	"\fCoachService\x12S\n" +
 	"\n" +
 	"AnalyzeJob\x12#.jobmate.coach.v1.AnalyzeJobRequest\x1a .jobmate.coach.v1.AnalysisResult\x12r\n" +
-	"\x13GenerateCoverLetter\x12,.jobmate.coach.v1.GenerateCoverLetterRequest\x1a-.jobmate.coach.v1.GenerateCoverLetterResponseB\xca\x01\n" +
-	"\x14com.jobmate.coach.v1B\fServiceProtoP\x01ZBgithub.com/jobmate-org/jobmate-proto/gen/go/proto/coach/v1;coachv1\xa2\x02\x03JCX\xaa\x02\x10Jobmate.Coach.V1\xca\x02\x10Jobmate\\Coach\\V1\xe2\x02\x1cJobmate\\Coach\\V1\\GPBMetadata\xea\x02\x12Jobmate::Coach::V1b\x06proto3"
+	"\x13GenerateCoverLetter\x12,.jobmate.coach.v1.GenerateCoverLetterRequest\x1a-.jobmate.coach.v1.GenerateCoverLetterResponseB\xd0\x01\n" +
+	"\x14com.jobmate.coach.v1B\fServiceProtoP\x01ZHgithub.com/TheJobMateCompany/jobmate-proto/gen/go/proto/coach/v1;coachv1\xa2\x02\x03JCX\xaa\x02\x10Jobmate.Coach.V1\xca\x02\x10Jobmate\\Coach\\V1\xe2\x02\x1cJobmate\\Coach\\V1\\GPBMetadata\xea\x02\x12Jobmate::Coach::V1b\x06proto3"
 
 var (
 	file_proto_coach_v1_service_proto_rawDescOnce sync.Once

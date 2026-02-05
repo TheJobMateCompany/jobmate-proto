@@ -7,7 +7,7 @@
 package discoveryv1
 
 import (
-	v1 "github.com/jobmate-org/jobmate-proto/gen/go/proto/common/v1"
+	v1 "github.com/TheJobMateCompany/jobmate-proto/gen/go/proto/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -369,8 +369,8 @@ const file_proto_discovery_v1_service_proto_rawDesc = "" +
 	"GetJobFeed\x12'.jobmate.discovery.v1.GetJobFeedRequest\x1a(.jobmate.discovery.v1.GetJobFeedResponse\x12O\n" +
 	"\n" +
 	"ApproveJob\x12'.jobmate.discovery.v1.ApproveJobRequest\x1a\x18.jobmate.common.v1.Empty\x12R\n" +
-	"\tAddJobUrl\x12&.jobmate.discovery.v1.AddJobUrlRequest\x1a\x1d.jobmate.discovery.v1.JobCardB\xe6\x01\n" +
-	"\x18com.jobmate.discovery.v1B\fServiceProtoP\x01ZJgithub.com/jobmate-org/jobmate-proto/gen/go/proto/discovery/v1;discoveryv1\xa2\x02\x03JDX\xaa\x02\x14Jobmate.Discovery.V1\xca\x02\x14Jobmate\\Discovery\\V1\xe2\x02 Jobmate\\Discovery\\V1\\GPBMetadata\xea\x02\x16Jobmate::Discovery::V1b\x06proto3"
+	"\tAddJobUrl\x12&.jobmate.discovery.v1.AddJobUrlRequest\x1a\x1d.jobmate.discovery.v1.JobCardB\xec\x01\n" +
+	"\x18com.jobmate.discovery.v1B\fServiceProtoP\x01ZPgithub.com/TheJobMateCompany/jobmate-proto/gen/go/proto/discovery/v1;discoveryv1\xa2\x02\x03JDX\xaa\x02\x14Jobmate.Discovery.V1\xca\x02\x14Jobmate\\Discovery\\V1\xe2\x02 Jobmate\\Discovery\\V1\\GPBMetadata\xea\x02\x16Jobmate::Discovery::V1b\x06proto3"
 
 var (
 	file_proto_discovery_v1_service_proto_rawDescOnce sync.Once

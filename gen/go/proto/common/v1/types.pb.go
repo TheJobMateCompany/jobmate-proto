@@ -251,9 +251,9 @@ const file_proto_common_v1_types_proto_rawDesc = "" +
 	"\x05Skill\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05level\x18\x02 \x01(\tR\x05level\x12\"\n" +
-	"\ris_hard_skill\x18\x03 \x01(\bR\visHardSkillB\xcf\x01\n" +
+	"\ris_hard_skill\x18\x03 \x01(\bR\visHardSkillB\xd5\x01\n" +
 	"\x15com.jobmate.common.v1B\n" +
-	"TypesProtoP\x01ZDgithub.com/jobmate-org/jobmate-proto/gen/go/proto/common/v1;commonv1\xa2\x02\x03JCX\xaa\x02\x11Jobmate.Common.V1\xca\x02\x11Jobmate\\Common\\V1\xe2\x02\x1dJobmate\\Common\\V1\\GPBMetadata\xea\x02\x13Jobmate::Common::V1b\x06proto3"
+	"TypesProtoP\x01ZJgithub.com/TheJobMateCompany/jobmate-proto/gen/go/proto/common/v1;commonv1\xa2\x02\x03JCX\xaa\x02\x11Jobmate.Common.V1\xca\x02\x11Jobmate\\Common\\V1\xe2\x02\x1dJobmate\\Common\\V1\\GPBMetadata\xea\x02\x13Jobmate::Common::V1b\x06proto3"
 
 var (
 	file_proto_common_v1_types_proto_rawDescOnce sync.Once

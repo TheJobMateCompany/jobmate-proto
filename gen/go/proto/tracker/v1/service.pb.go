@@ -7,7 +7,7 @@
 package trackerv1
 
 import (
-	v1 "github.com/jobmate-org/jobmate-proto/gen/go/proto/common/v1"
+	v1 "github.com/TheJobMateCompany/jobmate-proto/gen/go/proto/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -633,8 +633,8 @@ const file_proto_tracker_v1_service_proto_rawDesc = "" +
 	"\rUpdateProfile\x12(.jobmate.tracker.v1.UpdateProfileRequest\x1a\x1b.jobmate.tracker.v1.Profile\x12b\n" +
 	"\x11CreateApplication\x12,.jobmate.tracker.v1.CreateApplicationRequest\x1a\x1f.jobmate.tracker.v1.Application\x12j\n" +
 	"\x0fGetApplications\x12*.jobmate.tracker.v1.GetApplicationsRequest\x1a+.jobmate.tracker.v1.GetApplicationsResponse\x12c\n" +
-	"\x17UpdateApplicationStatus\x12'.jobmate.tracker.v1.UpdateStatusRequest\x1a\x1f.jobmate.tracker.v1.ApplicationB\xd8\x01\n" +
-	"\x16com.jobmate.tracker.v1B\fServiceProtoP\x01ZFgithub.com/jobmate-org/jobmate-proto/gen/go/proto/tracker/v1;trackerv1\xa2\x02\x03JTX\xaa\x02\x12Jobmate.Tracker.V1\xca\x02\x12Jobmate\\Tracker\\V1\xe2\x02\x1eJobmate\\Tracker\\V1\\GPBMetadata\xea\x02\x14Jobmate::Tracker::V1b\x06proto3"
+	"\x17UpdateApplicationStatus\x12'.jobmate.tracker.v1.UpdateStatusRequest\x1a\x1f.jobmate.tracker.v1.ApplicationB\xde\x01\n" +
+	"\x16com.jobmate.tracker.v1B\fServiceProtoP\x01ZLgithub.com/TheJobMateCompany/jobmate-proto/gen/go/proto/tracker/v1;trackerv1\xa2\x02\x03JTX\xaa\x02\x12Jobmate.Tracker.V1\xca\x02\x12Jobmate\\Tracker\\V1\xe2\x02\x1eJobmate\\Tracker\\V1\\GPBMetadata\xea\x02\x14Jobmate::Tracker::V1b\x06proto3"
 
 var (
 	file_proto_tracker_v1_service_proto_rawDescOnce sync.Once

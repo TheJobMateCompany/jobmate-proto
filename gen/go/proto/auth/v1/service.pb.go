@@ -7,7 +7,7 @@
 package authv1
 
 import (
-	_ "github.com/jobmate-org/jobmate-proto/gen/go/proto/common/v1"
+	_ "github.com/TheJobMateCompany/jobmate-proto/gen/go/proto/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -334,8 +334,8 @@ const file_proto_auth_v1_service_proto_rawDesc = "" +
 	"\vAuthService\x12K\n" +
 	"\bRegister\x12 .jobmate.auth.v1.RegisterRequest\x1a\x1d.jobmate.auth.v1.AuthResponse\x12E\n" +
 	"\x05Login\x12\x1d.jobmate.auth.v1.LoginRequest\x1a\x1d.jobmate.auth.v1.AuthResponse\x12^\n" +
-	"\rValidateToken\x12%.jobmate.auth.v1.ValidateTokenRequest\x1a&.jobmate.auth.v1.ValidateTokenResponseB\xc3\x01\n" +
-	"\x13com.jobmate.auth.v1B\fServiceProtoP\x01Z@github.com/jobmate-org/jobmate-proto/gen/go/proto/auth/v1;authv1\xa2\x02\x03JAX\xaa\x02\x0fJobmate.Auth.V1\xca\x02\x0fJobmate\\Auth\\V1\xe2\x02\x1bJobmate\\Auth\\V1\\GPBMetadata\xea\x02\x11Jobmate::Auth::V1b\x06proto3"
+	"\rValidateToken\x12%.jobmate.auth.v1.ValidateTokenRequest\x1a&.jobmate.auth.v1.ValidateTokenResponseB\xc9\x01\n" +
+	"\x13com.jobmate.auth.v1B\fServiceProtoP\x01ZFgithub.com/TheJobMateCompany/jobmate-proto/gen/go/proto/auth/v1;authv1\xa2\x02\x03JAX\xaa\x02\x0fJobmate.Auth.V1\xca\x02\x0fJobmate\\Auth\\V1\xe2\x02\x1bJobmate\\Auth\\V1\\GPBMetadata\xea\x02\x11Jobmate::Auth::V1b\x06proto3"
 
 var (
 	file_proto_auth_v1_service_proto_rawDescOnce sync.Once

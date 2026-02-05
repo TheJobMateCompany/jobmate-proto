@@ -1,3 +1,3 @@
-module github.com/jobmate-org/jobmate-proto
+module github.com/TheJobMateCompany/jobmate-proto
 
 go 1.25.5

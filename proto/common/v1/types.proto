@@ -4,7 +4,7 @@ package jobmate.common.v1;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/jobmate-org/jobmate-proto/gen/go/common/v1;commonv1";
+option go_package = "github.com/TheJobMateCompany/jobmate-proto/gen/go/common/v1;commonv1";
 
 // Un standard pour les réponses vides
 message Empty {}

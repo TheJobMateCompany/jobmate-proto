@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package jobmate.discovery.v1;
+
+import "google/protobuf/timestamp.proto";
+import "proto/common/v1/types.proto";
+
+option go_package = "github.com/jobmate-org/jobmate-proto/gen/go/discovery/v1;discoveryv1";
+
+service DiscoveryService {
+  // Inbox : Les offres trouvées par les scrapers
+  rpc GetJobFeed (GetJobFeedRequest) returns (GetJobFeedResponse);
+  
+  // Approuver une offre (déclenche le passage vers Tracker + IA)
+  rpc ApproveJob (ApproveJobRequest) returns (jobmate.common.v1.Empty);
+  
+  // Ajouter une URL manuellement
+  rpc AddJobUrl (AddJobUrlRequest) returns (JobCard);
+}
+
+message JobCard {
+  string id = 1;
+  string title = 2;
+  string company = 3;
+  string location = 4;
+  string source_url = 5;
+  bool is_approved = 6;
+  google.protobuf.Timestamp discovered_at = 7;
+  // Raw description stockée mais pas forcément renvoyée en liste légère
+  string description_preview = 8;
+}
+
+message GetJobFeedRequest {
+  string user_id = 1;
+  jobmate.common.v1.PaginationRequest pagination = 2;
+}
+
+message GetJobFeedResponse {
+  repeated JobCard jobs = 1;
+  jobmate.common.v1.PaginationResponse pagination = 2;
+}
+
+message ApproveJobRequest {
+  string job_id = 1;
+  string user_id = 2;
+}
+
+message AddJobUrlRequest {
+  string url = 1;
+  string user_id = 2;
+}

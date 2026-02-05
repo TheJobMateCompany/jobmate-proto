@@ -1,0 +1,10 @@
+version: v1
+name: buf.build/jobmate/proto
+deps:
+  - buf.build/googleapis/googleapis # Pour importer les types Google (Timestamp, etc.)
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT

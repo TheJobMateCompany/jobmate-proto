@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package jobmate.tracker.v1;
+
+import "google/protobuf/timestamp.proto";
+import "proto/common/v1/types.proto";
+
+option go_package = "github.com/jobmate-org/jobmate-proto/gen/go/tracker/v1;trackerv1";
+
+service TrackerService {
+  // --- Profile Management ---
+  rpc GetProfile (GetProfileRequest) returns (Profile);
+  rpc UpdateProfile (UpdateProfileRequest) returns (Profile);
+  
+  // --- Application Tracking (Kanban) ---
+  rpc CreateApplication (CreateApplicationRequest) returns (Application);
+  rpc GetApplications (GetApplicationsRequest) returns (GetApplicationsResponse);
+  rpc UpdateApplicationStatus (UpdateStatusRequest) returns (Application);
+}
+
+// --- Messages ---
+
+message Profile {
+  string user_id = 1;
+  string status = 2; // "Student", "Open to work"...
+  repeated jobmate.common.v1.Skill skills = 3;
+  string location = 4;
+  string bio = 5;
+  // On simplifie pour l'exemple, mais on pourrait ajouter education/experience ici
+}
+
+message GetProfileRequest {
+  string user_id = 1;
+}
+
+message UpdateProfileRequest {
+  string user_id = 1;
+  Profile profile_data = 2;
+}
+
+enum ApplicationStatus {
+  STATUS_UNKNOWN = 0;
+  STATUS_TO_APPLY = 1;   // "En attente"
+  STATUS_APPLIED = 2;    // "Postulé"
+  STATUS_INTERVIEW = 3;  // "Entretien"
+  STATUS_OFFER = 4;      // "Offre reçue"
+  STATUS_REJECTED = 5;   // "Refusé"
+  STATUS_HIRED = 6;      // "Embauché"
+}
+
+message Application {
+  string id = 1;
+  string user_id = 2;
+  string job_id = 3; // Référence vers le Discovery Service ou copie locale
+  ApplicationStatus status = 4;
+  string company_name = 5;
+  string job_title = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+  
+  // Données IA (stockées ici pour affichage rapide)
+  int32 match_score = 9; 
+}
+
+message CreateApplicationRequest {
+  string user_id = 1;
+  string job_feed_id = 2; // ID de l'offre validée
+}
+
+message GetApplicationsRequest {
+  string user_id = 1;
+  jobmate.common.v1.PaginationRequest pagination = 2;
+}
+
+message GetApplicationsResponse {
+  repeated Application applications = 1;
+  jobmate.common.v1.PaginationResponse pagination = 2;
+}
+
+message UpdateStatusRequest {
+  string application_id = 1;
+  ApplicationStatus new_status = 2;
+}

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package jobmate.common.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/jobmate-org/jobmate-proto/gen/go/common/v1;commonv1";
+
+// Un standard pour les réponses vides
+message Empty {}
+
+// Pagination standard
+message PaginationRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+message PaginationResponse {
+  int32 total_count = 1;
+  int32 current_page = 2;
+  int32 total_pages = 3;
+}
+
+// Les compétences (utilisées dans Profile et Job)
+message Skill {
+  string name = 1;
+  string level = 2; // "Beginner", "Expert"...
+  bool is_hard_skill = 3; // true = Hard, false = Soft
+}

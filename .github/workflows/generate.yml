@@ -1,0 +1,78 @@
+name: Generate Protobuf
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'proto/**'
+      - 'buf.yaml'
+      - 'buf.gen.yaml'
+      - '.github/workflows/generate.yml'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Important pour pouvoir pusher le code généré
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # --- SETUP TOOLS ---
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+          
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Buf
+        uses: bufbuild/buf-setup-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      # --- INSTALL PLUGINS ---
+      - name: Install Go Plugins
+        run: |
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+      - name: Install Python Plugins
+        run: |
+          python -m pip install grpcio-tools mypy-protobuf
+
+      - name: Install TS Plugins
+        run: |
+          npm install -g ts-proto
+
+      # --- CLEANUP OLD GEN ---
+      - name: Clean gen folder
+        run: rm -rf gen
+
+      # --- GENERATE CODE ---
+      - name: Run Buf Generate
+        run: buf generate
+
+      # --- PYTHON FIXES ---
+      # Python a besoin de __init__.py dans chaque dossier pour importer les modules
+      - name: Add __init__.py for Python
+        run: |
+          find gen/python -type d -exec touch {}/__init__.py \;
+
+      # --- COMMIT & PUSH ---
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-generate protobuf code [skip ci]"
+          branch: main
+          file_pattern: 'gen/**'

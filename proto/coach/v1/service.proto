@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package jobmate.coach.v1;
+
+import "proto/common/v1/types.proto";
+
+option go_package = "github.com/jobmate-org/jobmate-proto/gen/go/coach/v1;coachv1";
+
+service CoachService {
+  // Analyse une offre spécifique par rapport à un profil
+  rpc AnalyzeJob (AnalyzeJobRequest) returns (AnalysisResult);
+  
+  // Génère une lettre de motivation
+  rpc GenerateCoverLetter (GenerateCoverLetterRequest) returns (GenerateCoverLetterResponse);
+}
+
+message AnalyzeJobRequest {
+  string user_id = 1;
+  string job_id = 2;
+  string job_description_text = 3; // On passe le texte brut ou l'ID si le coach a accès à la DB
+}
+
+message AnalysisResult {
+  int32 match_score = 1; // 0 à 100
+  repeated string pros = 2; // Points forts
+  repeated string cons = 3; // Points faibles
+  repeated string missing_keywords = 4; // Mots clés ATS manquants
+}
+
+message GenerateCoverLetterRequest {
+  string user_id = 1;
+  string job_description = 2;
+  string tone = 3; // "Formal", "Casual", "Enthusiastic"
+}
+
+message GenerateCoverLetterResponse {
+  string content = 1;
+}

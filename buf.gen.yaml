@@ -1,0 +1,32 @@
+# buf.gen.yaml
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/jobmate-org/jobmate-proto/gen/go
+    except:
+      - buf.build/googleapis/googleapis
+plugins:
+  # --- GOLANG ---
+  - plugin: go
+    out: gen/go
+    opt: paths=source_relative
+  - plugin: go-grpc
+    out: gen/go
+    opt: paths=source_relative
+
+  # --- PYTHON ---
+  - plugin: python
+    out: gen/python
+  - plugin: pyi # Pour l'autocomplétion (Type Hinting)
+    out: gen/python
+  - plugin: grpc-python
+    out: gen/python
+
+  # --- TYPESCRIPT ---
+  - plugin: ts
+    out: gen/ts
+    opt:
+      - esModuleInterop=true
+      - outputServices=grpc-js
+      - env=node

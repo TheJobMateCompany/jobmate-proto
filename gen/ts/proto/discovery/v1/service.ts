@@ -30,7 +30,7 @@ export interface JobCard {
   location: string;
   sourceUrl: string;
   isApproved: boolean;
-  discoveredAt:
+  discoveredAt?:
     | Date
     | undefined;
   /** Raw description stockée mais pas forcément renvoyée en liste légère */
@@ -39,12 +39,12 @@ export interface JobCard {
 
 export interface GetJobFeedRequest {
   userId: string;
-  pagination: PaginationRequest | undefined;
+  pagination?: PaginationRequest | undefined;
 }
 
 export interface GetJobFeedResponse {
   jobs: JobCard[];
-  pagination: PaginationResponse | undefined;
+  pagination?: PaginationResponse | undefined;
 }
 
 export interface ApproveJobRequest {
@@ -237,10 +237,10 @@ export const JobCard: MessageFns<JobCard> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<JobCard>, I>>(base?: I): JobCard {
-    return JobCard.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<JobCard>): JobCard {
+    return JobCard.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<JobCard>, I>>(object: I): JobCard {
+  fromPartial(object: DeepPartial<JobCard>): JobCard {
     const message = createBaseJobCard();
     message.id = object.id ?? "";
     message.title = object.title ?? "";
@@ -323,10 +323,10 @@ export const GetJobFeedRequest: MessageFns<GetJobFeedRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetJobFeedRequest>, I>>(base?: I): GetJobFeedRequest {
-    return GetJobFeedRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<GetJobFeedRequest>): GetJobFeedRequest {
+    return GetJobFeedRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<GetJobFeedRequest>, I>>(object: I): GetJobFeedRequest {
+  fromPartial(object: DeepPartial<GetJobFeedRequest>): GetJobFeedRequest {
     const message = createBaseGetJobFeedRequest();
     message.userId = object.userId ?? "";
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -401,10 +401,10 @@ export const GetJobFeedResponse: MessageFns<GetJobFeedResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetJobFeedResponse>, I>>(base?: I): GetJobFeedResponse {
-    return GetJobFeedResponse.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<GetJobFeedResponse>): GetJobFeedResponse {
+    return GetJobFeedResponse.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<GetJobFeedResponse>, I>>(object: I): GetJobFeedResponse {
+  fromPartial(object: DeepPartial<GetJobFeedResponse>): GetJobFeedResponse {
     const message = createBaseGetJobFeedResponse();
     message.jobs = object.jobs?.map((e) => JobCard.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -487,10 +487,10 @@ export const ApproveJobRequest: MessageFns<ApproveJobRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ApproveJobRequest>, I>>(base?: I): ApproveJobRequest {
-    return ApproveJobRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<ApproveJobRequest>): ApproveJobRequest {
+    return ApproveJobRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<ApproveJobRequest>, I>>(object: I): ApproveJobRequest {
+  fromPartial(object: DeepPartial<ApproveJobRequest>): ApproveJobRequest {
     const message = createBaseApproveJobRequest();
     message.jobId = object.jobId ?? "";
     message.userId = object.userId ?? "";
@@ -567,10 +567,10 @@ export const AddJobUrlRequest: MessageFns<AddJobUrlRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<AddJobUrlRequest>, I>>(base?: I): AddJobUrlRequest {
-    return AddJobUrlRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<AddJobUrlRequest>): AddJobUrlRequest {
+    return AddJobUrlRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<AddJobUrlRequest>, I>>(object: I): AddJobUrlRequest {
+  fromPartial(object: DeepPartial<AddJobUrlRequest>): AddJobUrlRequest {
     const message = createBaseAddJobUrlRequest();
     message.url = object.url ?? "";
     message.userId = object.userId ?? "";
@@ -689,10 +689,6 @@ export type DeepPartial<T> = T extends Builtin ? T
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
 function toTimestamp(date: Date): Timestamp {
   const seconds = Math.trunc(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
@@ -724,6 +720,6 @@ export interface MessageFns<T> {
   decode(input: BinaryReader | Uint8Array, length?: number): T;
   fromJSON(object: any): T;
   toJSON(message: T): unknown;
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
+  create(base?: DeepPartial<T>): T;
+  fromPartial(object: DeepPartial<T>): T;
 }

@@ -153,10 +153,10 @@ export const RegisterRequest: MessageFns<RegisterRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<RegisterRequest>, I>>(base?: I): RegisterRequest {
-    return RegisterRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<RegisterRequest>): RegisterRequest {
+    return RegisterRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<RegisterRequest>, I>>(object: I): RegisterRequest {
+  fromPartial(object: DeepPartial<RegisterRequest>): RegisterRequest {
     const message = createBaseRegisterRequest();
     message.email = object.email ?? "";
     message.password = object.password ?? "";
@@ -231,10 +231,10 @@ export const LoginRequest: MessageFns<LoginRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<LoginRequest>, I>>(base?: I): LoginRequest {
-    return LoginRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<LoginRequest>): LoginRequest {
+    return LoginRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<LoginRequest>, I>>(object: I): LoginRequest {
+  fromPartial(object: DeepPartial<LoginRequest>): LoginRequest {
     const message = createBaseLoginRequest();
     message.email = object.email ?? "";
     message.password = object.password ?? "";
@@ -353,10 +353,10 @@ export const AuthResponse: MessageFns<AuthResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<AuthResponse>, I>>(base?: I): AuthResponse {
-    return AuthResponse.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<AuthResponse>): AuthResponse {
+    return AuthResponse.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<AuthResponse>, I>>(object: I): AuthResponse {
+  fromPartial(object: DeepPartial<AuthResponse>): AuthResponse {
     const message = createBaseAuthResponse();
     message.accessToken = object.accessToken ?? "";
     message.refreshToken = object.refreshToken ?? "";
@@ -414,10 +414,10 @@ export const ValidateTokenRequest: MessageFns<ValidateTokenRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ValidateTokenRequest>, I>>(base?: I): ValidateTokenRequest {
-    return ValidateTokenRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<ValidateTokenRequest>): ValidateTokenRequest {
+    return ValidateTokenRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<ValidateTokenRequest>, I>>(object: I): ValidateTokenRequest {
+  fromPartial(object: DeepPartial<ValidateTokenRequest>): ValidateTokenRequest {
     const message = createBaseValidateTokenRequest();
     message.token = object.token ?? "";
     return message;
@@ -497,10 +497,10 @@ export const ValidateTokenResponse: MessageFns<ValidateTokenResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ValidateTokenResponse>, I>>(base?: I): ValidateTokenResponse {
-    return ValidateTokenResponse.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<ValidateTokenResponse>): ValidateTokenResponse {
+    return ValidateTokenResponse.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<ValidateTokenResponse>, I>>(object: I): ValidateTokenResponse {
+  fromPartial(object: DeepPartial<ValidateTokenResponse>): ValidateTokenResponse {
     const message = createBaseValidateTokenResponse();
     message.isValid = object.isValid ?? false;
     message.userId = object.userId ?? "";
@@ -608,10 +608,6 @@ export type DeepPartial<T> = T extends Builtin ? T
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
@@ -621,6 +617,6 @@ export interface MessageFns<T> {
   decode(input: BinaryReader | Uint8Array, length?: number): T;
   fromJSON(object: any): T;
   toJSON(message: T): unknown;
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
+  create(base?: DeepPartial<T>): T;
+  fromPartial(object: DeepPartial<T>): T;
 }

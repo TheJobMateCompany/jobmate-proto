@@ -59,21 +59,20 @@ jobs:
       - name: Install Python Plugins
         run: |
           python -m pip install grpcio-tools mypy-protobuf
-          # Le plugin est dans le package grpc_tools, il faut le trouver et le lier
-          GRPC_TOOLS_DIR=$(python -c "import grpc_tools; import os; print(os.path.dirname(grpc_tools.__file__))")
-          echo "grpc_tools directory: $GRPC_TOOLS_DIR"
-          ls -la "$GRPC_TOOLS_DIR"
-          # Chercher le binaire du plugin
-          find "$GRPC_TOOLS_DIR" -type f -name "*grpc*" -o -name "*plugin*" | head -20
-          # Copier le binaire s'il existe
-          if [ -f "$GRPC_TOOLS_DIR/grpc_python_plugin" ]; then
-            sudo cp "$GRPC_TOOLS_DIR/grpc_python_plugin" /usr/local/bin/protoc-gen-grpc_python
-            sudo chmod +x /usr/local/bin/protoc-gen-grpc_python
-          else
-            # Le plugin n'existe pas comme binaire standalone, il faut l'extraire
-            echo "Plugin not found as standalone binary. Checking package contents..."
-            python -c "import grpc_tools; print(dir(grpc_tools))"
-          fi
+          # Compiler grpc_python_plugin depuis les sources
+          echo "Building grpc_python_plugin from source..."
+          cd /tmp
+          git clone --depth 1 --branch v1.76.0 https://github.com/grpc/grpc
+          cd grpc
+          git submodule update --init
+          mkdir -p cmake/build
+          cd cmake/build
+          cmake ../.. -DgRPC_INSTALL=ON -DgRPC_BUILD_TESTS=OFF
+          make grpc_python_plugin -j$(nproc)
+          sudo cp grpc_python_plugin /usr/local/bin/protoc-gen-grpc_python
+          sudo chmod +x /usr/local/bin/protoc-gen-grpc_python
+          echo "Plugin installed successfully"
+          /usr/local/bin/protoc-gen-grpc_python --version || echo "Version check not available"
 
       - name: Install TS Plugins
         run: |

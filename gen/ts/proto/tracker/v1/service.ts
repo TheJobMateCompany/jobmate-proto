@@ -108,7 +108,7 @@ export interface GetProfileRequest {
 
 export interface UpdateProfileRequest {
   userId: string;
-  profileData: Profile | undefined;
+  profileData?: Profile | undefined;
 }
 
 export interface Application {
@@ -119,8 +119,8 @@ export interface Application {
   status: ApplicationStatus;
   companyName: string;
   jobTitle: string;
-  createdAt: Date | undefined;
-  updatedAt:
+  createdAt?: Date | undefined;
+  updatedAt?:
     | Date
     | undefined;
   /** Données IA (stockées ici pour affichage rapide) */
@@ -135,12 +135,12 @@ export interface CreateApplicationRequest {
 
 export interface GetApplicationsRequest {
   userId: string;
-  pagination: PaginationRequest | undefined;
+  pagination?: PaginationRequest | undefined;
 }
 
 export interface GetApplicationsResponse {
   applications: Application[];
-  pagination: PaginationResponse | undefined;
+  pagination?: PaginationResponse | undefined;
 }
 
 export interface UpdateStatusRequest {
@@ -262,10 +262,10 @@ export const Profile: MessageFns<Profile> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Profile>, I>>(base?: I): Profile {
-    return Profile.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<Profile>): Profile {
+    return Profile.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<Profile>, I>>(object: I): Profile {
+  fromPartial(object: DeepPartial<Profile>): Profile {
     const message = createBaseProfile();
     message.userId = object.userId ?? "";
     message.status = object.status ?? "";
@@ -330,10 +330,10 @@ export const GetProfileRequest: MessageFns<GetProfileRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetProfileRequest>, I>>(base?: I): GetProfileRequest {
-    return GetProfileRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<GetProfileRequest>): GetProfileRequest {
+    return GetProfileRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<GetProfileRequest>, I>>(object: I): GetProfileRequest {
+  fromPartial(object: DeepPartial<GetProfileRequest>): GetProfileRequest {
     const message = createBaseGetProfileRequest();
     message.userId = object.userId ?? "";
     return message;
@@ -413,10 +413,10 @@ export const UpdateProfileRequest: MessageFns<UpdateProfileRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<UpdateProfileRequest>, I>>(base?: I): UpdateProfileRequest {
-    return UpdateProfileRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<UpdateProfileRequest>): UpdateProfileRequest {
+    return UpdateProfileRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<UpdateProfileRequest>, I>>(object: I): UpdateProfileRequest {
+  fromPartial(object: DeepPartial<UpdateProfileRequest>): UpdateProfileRequest {
     const message = createBaseUpdateProfileRequest();
     message.userId = object.userId ?? "";
     message.profileData = (object.profileData !== undefined && object.profileData !== null)
@@ -634,10 +634,10 @@ export const Application: MessageFns<Application> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Application>, I>>(base?: I): Application {
-    return Application.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<Application>): Application {
+    return Application.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<Application>, I>>(object: I): Application {
+  fromPartial(object: DeepPartial<Application>): Application {
     const message = createBaseApplication();
     message.id = object.id ?? "";
     message.userId = object.userId ?? "";
@@ -725,10 +725,10 @@ export const CreateApplicationRequest: MessageFns<CreateApplicationRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CreateApplicationRequest>, I>>(base?: I): CreateApplicationRequest {
-    return CreateApplicationRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<CreateApplicationRequest>): CreateApplicationRequest {
+    return CreateApplicationRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<CreateApplicationRequest>, I>>(object: I): CreateApplicationRequest {
+  fromPartial(object: DeepPartial<CreateApplicationRequest>): CreateApplicationRequest {
     const message = createBaseCreateApplicationRequest();
     message.userId = object.userId ?? "";
     message.jobFeedId = object.jobFeedId ?? "";
@@ -805,10 +805,10 @@ export const GetApplicationsRequest: MessageFns<GetApplicationsRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetApplicationsRequest>, I>>(base?: I): GetApplicationsRequest {
-    return GetApplicationsRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<GetApplicationsRequest>): GetApplicationsRequest {
+    return GetApplicationsRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<GetApplicationsRequest>, I>>(object: I): GetApplicationsRequest {
+  fromPartial(object: DeepPartial<GetApplicationsRequest>): GetApplicationsRequest {
     const message = createBaseGetApplicationsRequest();
     message.userId = object.userId ?? "";
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -885,10 +885,10 @@ export const GetApplicationsResponse: MessageFns<GetApplicationsResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetApplicationsResponse>, I>>(base?: I): GetApplicationsResponse {
-    return GetApplicationsResponse.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<GetApplicationsResponse>): GetApplicationsResponse {
+    return GetApplicationsResponse.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<GetApplicationsResponse>, I>>(object: I): GetApplicationsResponse {
+  fromPartial(object: DeepPartial<GetApplicationsResponse>): GetApplicationsResponse {
     const message = createBaseGetApplicationsResponse();
     message.applications = object.applications?.map((e) => Application.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -971,10 +971,10 @@ export const UpdateStatusRequest: MessageFns<UpdateStatusRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<UpdateStatusRequest>, I>>(base?: I): UpdateStatusRequest {
-    return UpdateStatusRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<UpdateStatusRequest>): UpdateStatusRequest {
+    return UpdateStatusRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<UpdateStatusRequest>, I>>(object: I): UpdateStatusRequest {
+  fromPartial(object: DeepPartial<UpdateStatusRequest>): UpdateStatusRequest {
     const message = createBaseUpdateStatusRequest();
     message.applicationId = object.applicationId ?? "";
     message.newStatus = object.newStatus ?? 0;
@@ -1143,10 +1143,6 @@ export type DeepPartial<T> = T extends Builtin ? T
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
 function toTimestamp(date: Date): Timestamp {
   const seconds = Math.trunc(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
@@ -1178,6 +1174,6 @@ export interface MessageFns<T> {
   decode(input: BinaryReader | Uint8Array, length?: number): T;
   fromJSON(object: any): T;
   toJSON(message: T): unknown;
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
+  create(base?: DeepPartial<T>): T;
+  fromPartial(object: DeepPartial<T>): T;
 }

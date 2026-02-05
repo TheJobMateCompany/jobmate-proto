@@ -142,10 +142,10 @@ export const AnalyzeJobRequest: MessageFns<AnalyzeJobRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<AnalyzeJobRequest>, I>>(base?: I): AnalyzeJobRequest {
-    return AnalyzeJobRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<AnalyzeJobRequest>): AnalyzeJobRequest {
+    return AnalyzeJobRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<AnalyzeJobRequest>, I>>(object: I): AnalyzeJobRequest {
+  fromPartial(object: DeepPartial<AnalyzeJobRequest>): AnalyzeJobRequest {
     const message = createBaseAnalyzeJobRequest();
     message.userId = object.userId ?? "";
     message.jobId = object.jobId ?? "";
@@ -257,10 +257,10 @@ export const AnalysisResult: MessageFns<AnalysisResult> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<AnalysisResult>, I>>(base?: I): AnalysisResult {
-    return AnalysisResult.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<AnalysisResult>): AnalysisResult {
+    return AnalysisResult.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<AnalysisResult>, I>>(object: I): AnalysisResult {
+  fromPartial(object: DeepPartial<AnalysisResult>): AnalysisResult {
     const message = createBaseAnalysisResult();
     message.matchScore = object.matchScore ?? 0;
     message.pros = object.pros?.map((e) => e) || [];
@@ -358,10 +358,10 @@ export const GenerateCoverLetterRequest: MessageFns<GenerateCoverLetterRequest> 
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GenerateCoverLetterRequest>, I>>(base?: I): GenerateCoverLetterRequest {
-    return GenerateCoverLetterRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<GenerateCoverLetterRequest>): GenerateCoverLetterRequest {
+    return GenerateCoverLetterRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<GenerateCoverLetterRequest>, I>>(object: I): GenerateCoverLetterRequest {
+  fromPartial(object: DeepPartial<GenerateCoverLetterRequest>): GenerateCoverLetterRequest {
     const message = createBaseGenerateCoverLetterRequest();
     message.userId = object.userId ?? "";
     message.jobDescription = object.jobDescription ?? "";
@@ -418,10 +418,10 @@ export const GenerateCoverLetterResponse: MessageFns<GenerateCoverLetterResponse
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GenerateCoverLetterResponse>, I>>(base?: I): GenerateCoverLetterResponse {
-    return GenerateCoverLetterResponse.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<GenerateCoverLetterResponse>): GenerateCoverLetterResponse {
+    return GenerateCoverLetterResponse.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<GenerateCoverLetterResponse>, I>>(object: I): GenerateCoverLetterResponse {
+  fromPartial(object: DeepPartial<GenerateCoverLetterResponse>): GenerateCoverLetterResponse {
     const message = createBaseGenerateCoverLetterResponse();
     message.content = object.content ?? "";
     return message;
@@ -513,10 +513,6 @@ export type DeepPartial<T> = T extends Builtin ? T
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
@@ -526,6 +522,6 @@ export interface MessageFns<T> {
   decode(input: BinaryReader | Uint8Array, length?: number): T;
   fromJSON(object: any): T;
   toJSON(message: T): unknown;
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
+  create(base?: DeepPartial<T>): T;
+  fromPartial(object: DeepPartial<T>): T;
 }

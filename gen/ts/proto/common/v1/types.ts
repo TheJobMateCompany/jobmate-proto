@@ -68,10 +68,10 @@ export const Empty: MessageFns<Empty> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Empty>, I>>(base?: I): Empty {
-    return Empty.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<Empty>): Empty {
+    return Empty.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<Empty>, I>>(_: I): Empty {
+  fromPartial(_: DeepPartial<Empty>): Empty {
     const message = createBaseEmpty();
     return message;
   },
@@ -146,10 +146,10 @@ export const PaginationRequest: MessageFns<PaginationRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PaginationRequest>, I>>(base?: I): PaginationRequest {
-    return PaginationRequest.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<PaginationRequest>): PaginationRequest {
+    return PaginationRequest.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<PaginationRequest>, I>>(object: I): PaginationRequest {
+  fromPartial(object: DeepPartial<PaginationRequest>): PaginationRequest {
     const message = createBasePaginationRequest();
     message.page = object.page ?? 0;
     message.pageSize = object.pageSize ?? 0;
@@ -249,10 +249,10 @@ export const PaginationResponse: MessageFns<PaginationResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PaginationResponse>, I>>(base?: I): PaginationResponse {
-    return PaginationResponse.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<PaginationResponse>): PaginationResponse {
+    return PaginationResponse.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<PaginationResponse>, I>>(object: I): PaginationResponse {
+  fromPartial(object: DeepPartial<PaginationResponse>): PaginationResponse {
     const message = createBasePaginationResponse();
     message.totalCount = object.totalCount ?? 0;
     message.currentPage = object.currentPage ?? 0;
@@ -345,10 +345,10 @@ export const Skill: MessageFns<Skill> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Skill>, I>>(base?: I): Skill {
-    return Skill.fromPartial(base ?? ({} as any));
+  create(base?: DeepPartial<Skill>): Skill {
+    return Skill.fromPartial(base ?? {});
   },
-  fromPartial<I extends Exact<DeepPartial<Skill>, I>>(object: I): Skill {
+  fromPartial(object: DeepPartial<Skill>): Skill {
     const message = createBaseSkill();
     message.name = object.name ?? "";
     message.level = object.level ?? "";
@@ -365,10 +365,6 @@ export type DeepPartial<T> = T extends Builtin ? T
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
@@ -378,6 +374,6 @@ export interface MessageFns<T> {
   decode(input: BinaryReader | Uint8Array, length?: number): T;
   fromJSON(object: any): T;
   toJSON(message: T): unknown;
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
+  create(base?: DeepPartial<T>): T;
+  fromPartial(object: DeepPartial<T>): T;
 }

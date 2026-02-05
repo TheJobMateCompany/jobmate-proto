@@ -59,13 +59,25 @@ jobs:
       - name: Install Python Plugins
         run: |
           python -m pip install grpcio-tools mypy-protobuf
-          # Créer un lien symbolique pour le plugin grpc_python
-          PYTHON_SITE=$(python -c "import site; print(site.getsitepackages()[0])")
-          sudo cp ${PYTHON_SITE}/grpc_tools/grpc_python_plugin /usr/local/bin/protoc-gen-grpc_python 2>/dev/null || \
-          sudo ln -sf ${PYTHON_SITE}/grpc_tools/grpc_python_plugin /usr/local/bin/protoc-gen-grpc_python || \
-          sudo find /opt/hostedtoolcache/Python -name "grpc_python_plugin" -exec cp {} /usr/local/bin/protoc-gen-grpc_python \; 2>/dev/null
-          # Vérifier
-          ls -la /usr/local/bin/protoc-gen-grpc_python || echo "Plugin not found"
+          # Trouver le plugin grpc_python_plugin
+          echo "Searching for grpc_python_plugin..."
+          find /opt/hostedtoolcache/Python -name "grpc_python_plugin" 2>/dev/null || echo "Not in hostedtoolcache"
+          find ~/.local -name "grpc_python_plugin" 2>/dev/null || echo "Not in .local"
+          # Trouver et copier le plugin
+          GRPC_PLUGIN=$(find /opt/hostedtoolcache/Python -name "grpc_python_plugin" 2>/dev/null | head -n 1)
+          if [ -z "$GRPC_PLUGIN" ]; then
+            GRPC_PLUGIN=$(find ~/.local -name "grpc_python_plugin" 2>/dev/null | head -n 1)
+          fi
+          if [ -n "$GRPC_PLUGIN" ]; then
+            echo "Found plugin at: $GRPC_PLUGIN"
+            sudo cp "$GRPC_PLUGIN" /usr/local/bin/protoc-gen-grpc_python
+            sudo chmod +x /usr/local/bin/protoc-gen-grpc_python
+            echo "Installed to /usr/local/bin/protoc-gen-grpc_python"
+            ls -la /usr/local/bin/protoc-gen-grpc_python
+          else
+            echo "ERROR: grpc_python_plugin not found!"
+            exit 1
+          fi
 
       - name: Install TS Plugins
         run: |
